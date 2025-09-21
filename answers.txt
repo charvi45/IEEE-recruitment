@@ -1,0 +1,34 @@
+ans1)r label is a single integer in case of int(f) but your network’s output should not be an integer — it should be a vector of probabilities of size 10 so you can directly compare them with Cross-Entropy Loss.We use a 10-element one-hot encoded vector so the label format matches the network output, making it possible to compute Cross-Entropy Loss correctly.
+ans2)we use array so neural network is faster and more compatible with mathematical operations and vecotrised
+ans3)":"take all indices along that axis. "X[:, :, :, 0] " take the first channel of each image.we do this so that grayscale images only have one channel.Removing it simplifies reshaping and computations later.This slicing converts each image from (height, width, channels) to (height, width), keeping all pixel values but removing the unnecessary single channel.Each image is now a simple 2D array instead of a 3D array. This makes it easier to work with when flattening the image or feeding it into a model
+ans4)Most models (especially simple neural networks) don’t take 2D images directly—they expect a 1D vector as input.X becomes (num_images, 784), so each row is one flattened image, and we can feed it to the model easily.
+ans5)The learning rate is a number that tells the model how big a step to take when updating its weights during training.The gradient tells us the direction in which the function has the steepest rate of increase, but it does not tell us how far along this direction we should step.
+ans6)This ensures matrix multiplications work correctly for the forward pass.
+ans7)Broadcasting is when NumPy automatically expands smaller arrays so that they can be added, subtracted, or multiplied with bigger arrays.Each neuron has one bias that needs to be added to every sample.
+Instead of writing a loop to add the bias to each row, broadcasting automatically applies the bias to all rows at once.
+ans 8)
+np.random.randn-It generates random numbers from a standard normal distribution .These numbers can be positive or negative, and are used to initialize weights randomly.shape: (hidden_neurons, input_neurons)
+ans9)
+Activation functions are functions applied to a neuron’s output after the weighted sum and bias.
+
+Example: ReLU, Sigmoid, Tanh, SoftMax. It transforms the raw number into something meaningful for the next layer.Activation functions introduce curves, thresholds, and probabilities, letting the network model complicated, wiggly patterns in the data.
+
+
+ans 10
+)Softmax is a function that takes a vector of numbers (the raw outputs of your network) and turns them into probabilities that all add up to 1.Softmax ensures each output is between 0 and 1 and all outputs sum to 1 → interpretable as probabilities
+ans 11)loss function (two commonly used losses for linear classifiers: the SVM and the Softmax) that measures how compatible a given set of parameters is with respect to the ground truth labels in the training dataset.Without a loss function, the network has no idea whether it’s doing well or poorly.The loss function provides a direction to improve. During training, we use it to update the weights via backpropagation.
+ans12 Each image in Fashion-MNIST belongs to one of 10 classes (T-shirt, Trouser, Pullover, etc.).the network’s output is an array of 10 numbers for each image.There are 10 numbers because there are 10 possible classes, and each number tells the network’s confidence for that class.
+
+ans13)
+Subtracting the mean is called mean normalization or centering the data.
+It shifts the input values so that they are centered around 0 instead of some large average value.Makes training faster because the network doesn’t have to deal with large input biases.Helps the weights converge more easily during gradient descent.
+
+ans14)Softmax is applied at this position (output layer) because this is where we want a probability for each class, not in the hidden layers.That’s why softmax is applied here, right after the output layer, so the network’s raw outputs  become a valid probability distribution.
+
+ans15)During backpropagation, we need the latest outputs of the network for the current batch of inputs.
+Even if we had previously computed outputs using forward(), those outputs might be stale or from a different batch, so we recompute them here to ensure accuracy
+ans16)The validation dataset is a separate set of data that is not used during training. It helps us check how well the model performs on unseen data and acts like a “practice test” to see if the network has actually learned the patterns instead of just memorizing the training examples.Generalization refers to the model’s ability to correctly predict on new, unseen data. A model that generalizes well has learned the underlying patterns and can make accurate predictions beyond the training set, avoiding overfitting
+
+ans17)The model parameters are input_neurons, hidden_neurons, output_neurons, learning_rate, and epochs. Input_neurons is the number of features in each image, hidden_neurons controls how much the network can learn, and output_neurons is the number of classes. Learning_rate decides how fast the network updates weights, and epochs is how many times the network sees the whole dataset.
+ans 18)argmax selects the index of the highest probability, giving the final predicted class label.
+Hence, the output of the model is a probability distribution, while argmax gives a single class prediction.
